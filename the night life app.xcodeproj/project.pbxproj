@@ -1,0 +1,660 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		031CAB602D4BB62E00923A27 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 031CAB5F2D4BB62E00923A27 /* SQLite */; };
+		03620F1D2D4BDB03005819FD /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 03620F1C2D4BDB03005819FD /* FirebaseAnalytics */; };
+		03620F1F2D4BDB03005819FD /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 03620F1E2D4BDB03005819FD /* FirebaseAnalyticsOnDeviceConversion */; };
+		03620F212D4BDB03005819FD /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 03620F202D4BDB03005819FD /* FirebaseAnalyticsSwift */; };
+		03620F232D4BDB03005819FD /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 03620F222D4BDB03005819FD /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		03620F252D4BDB03005819FD /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 03620F242D4BDB03005819FD /* FirebaseAppCheck */; };
+		03620F282D4BDBBC005819FD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 03620F272D4BDBBC005819FD /* FirebaseStorage */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		031CAB072D4B74CA00923A27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 031CAAEE2D4B74C800923A27 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 031CAAF52D4B74C800923A27;
+			remoteInfo = "the night life app";
+		};
+		031CAB112D4B74CA00923A27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 031CAAEE2D4B74C800923A27 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 031CAAF52D4B74C800923A27;
+			remoteInfo = "the night life app";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		031CAAF62D4B74C800923A27 /* the night life app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "the night life app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		031CAB062D4B74CA00923A27 /* the night life appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "the night life appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		031CAB102D4B74CA00923A27 /* the night life appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "the night life appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		031CAAF82D4B74C800923A27 /* the night life app */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "the night life app";
+			sourceTree = "<group>";
+		};
+		031CAB092D4B74CA00923A27 /* the night life appTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "the night life appTests";
+			sourceTree = "<group>";
+		};
+		031CAB132D4B74CA00923A27 /* the night life appUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "the night life appUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		031CAAF32D4B74C800923A27 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03620F212D4BDB03005819FD /* FirebaseAnalyticsSwift in Frameworks */,
+				03620F232D4BDB03005819FD /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				03620F1D2D4BDB03005819FD /* FirebaseAnalytics in Frameworks */,
+				03620F1F2D4BDB03005819FD /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				03620F282D4BDBBC005819FD /* FirebaseStorage in Frameworks */,
+				03620F252D4BDB03005819FD /* FirebaseAppCheck in Frameworks */,
+				031CAB602D4BB62E00923A27 /* SQLite in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		031CAB032D4B74CA00923A27 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		031CAB0D2D4B74CA00923A27 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		031CAAED2D4B74C800923A27 = {
+			isa = PBXGroup;
+			children = (
+				031CAAF82D4B74C800923A27 /* the night life app */,
+				031CAB092D4B74CA00923A27 /* the night life appTests */,
+				031CAB132D4B74CA00923A27 /* the night life appUITests */,
+				03620F262D4BDBBC005819FD /* Frameworks */,
+				031CAAF72D4B74C800923A27 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		031CAAF72D4B74C800923A27 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				031CAAF62D4B74C800923A27 /* the night life app.app */,
+				031CAB062D4B74CA00923A27 /* the night life appTests.xctest */,
+				031CAB102D4B74CA00923A27 /* the night life appUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		03620F262D4BDBBC005819FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		031CAAF52D4B74C800923A27 /* the night life app */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 031CAB1A2D4B74CA00923A27 /* Build configuration list for PBXNativeTarget "the night life app" */;
+			buildPhases = (
+				031CAAF22D4B74C800923A27 /* Sources */,
+				031CAAF32D4B74C800923A27 /* Frameworks */,
+				031CAAF42D4B74C800923A27 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				031CAAF82D4B74C800923A27 /* the night life app */,
+			);
+			name = "the night life app";
+			packageProductDependencies = (
+				031CAB5F2D4BB62E00923A27 /* SQLite */,
+				03620F1C2D4BDB03005819FD /* FirebaseAnalytics */,
+				03620F1E2D4BDB03005819FD /* FirebaseAnalyticsOnDeviceConversion */,
+				03620F202D4BDB03005819FD /* FirebaseAnalyticsSwift */,
+				03620F222D4BDB03005819FD /* FirebaseAnalyticsWithoutAdIdSupport */,
+				03620F242D4BDB03005819FD /* FirebaseAppCheck */,
+				03620F272D4BDBBC005819FD /* FirebaseStorage */,
+			);
+			productName = "the night life app";
+			productReference = 031CAAF62D4B74C800923A27 /* the night life app.app */;
+			productType = "com.apple.product-type.application";
+		};
+		031CAB052D4B74CA00923A27 /* the night life appTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 031CAB1D2D4B74CA00923A27 /* Build configuration list for PBXNativeTarget "the night life appTests" */;
+			buildPhases = (
+				031CAB022D4B74CA00923A27 /* Sources */,
+				031CAB032D4B74CA00923A27 /* Frameworks */,
+				031CAB042D4B74CA00923A27 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				031CAB082D4B74CA00923A27 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				031CAB092D4B74CA00923A27 /* the night life appTests */,
+			);
+			name = "the night life appTests";
+			packageProductDependencies = (
+			);
+			productName = "the night life appTests";
+			productReference = 031CAB062D4B74CA00923A27 /* the night life appTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		031CAB0F2D4B74CA00923A27 /* the night life appUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 031CAB202D4B74CA00923A27 /* Build configuration list for PBXNativeTarget "the night life appUITests" */;
+			buildPhases = (
+				031CAB0C2D4B74CA00923A27 /* Sources */,
+				031CAB0D2D4B74CA00923A27 /* Frameworks */,
+				031CAB0E2D4B74CA00923A27 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				031CAB122D4B74CA00923A27 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				031CAB132D4B74CA00923A27 /* the night life appUITests */,
+			);
+			name = "the night life appUITests";
+			packageProductDependencies = (
+			);
+			productName = "the night life appUITests";
+			productReference = 031CAB102D4B74CA00923A27 /* the night life appUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		031CAAEE2D4B74C800923A27 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					031CAAF52D4B74C800923A27 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					031CAB052D4B74CA00923A27 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 031CAAF52D4B74C800923A27;
+					};
+					031CAB0F2D4B74CA00923A27 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 031CAAF52D4B74C800923A27;
+					};
+				};
+			};
+			buildConfigurationList = 031CAAF12D4B74C800923A27 /* Build configuration list for PBXProject "the night life app" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 031CAAED2D4B74C800923A27;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				031CAB5E2D4BB62E00923A27 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				03620F1B2D4BDB03005819FD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 031CAAF72D4B74C800923A27 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				031CAAF52D4B74C800923A27 /* the night life app */,
+				031CAB052D4B74CA00923A27 /* the night life appTests */,
+				031CAB0F2D4B74CA00923A27 /* the night life appUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		031CAAF42D4B74C800923A27 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		031CAB042D4B74CA00923A27 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		031CAB0E2D4B74CA00923A27 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		031CAAF22D4B74C800923A27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		031CAB022D4B74CA00923A27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		031CAB0C2D4B74CA00923A27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		031CAB082D4B74CA00923A27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 031CAAF52D4B74C800923A27 /* the night life app */;
+			targetProxy = 031CAB072D4B74CA00923A27 /* PBXContainerItemProxy */;
+		};
+		031CAB122D4B74CA00923A27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 031CAAF52D4B74C800923A27 /* the night life app */;
+			targetProxy = 031CAB112D4B74CA00923A27 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		031CAB182D4B74CA00923A27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		031CAB192D4B74CA00923A27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		031CAB1B2D4B74CA00923A27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"the night life app/Preview Content\"";
+				DEVELOPMENT_TEAM = R4B79WGP8R;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "no.vrity.the-night-life-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		031CAB1C2D4B74CA00923A27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"the night life app/Preview Content\"";
+				DEVELOPMENT_TEAM = R4B79WGP8R;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "no.vrity.the-night-life-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		031CAB1E2D4B74CA00923A27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R4B79WGP8R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "no.vrity.the-night-life-appTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/the night life app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/the night life app";
+			};
+			name = Debug;
+		};
+		031CAB1F2D4B74CA00923A27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R4B79WGP8R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "no.vrity.the-night-life-appTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/the night life app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/the night life app";
+			};
+			name = Release;
+		};
+		031CAB212D4B74CA00923A27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R4B79WGP8R;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "no.vrity.the-night-life-appUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "the night life app";
+			};
+			name = Debug;
+		};
+		031CAB222D4B74CA00923A27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R4B79WGP8R;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "no.vrity.the-night-life-appUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "the night life app";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		031CAAF12D4B74C800923A27 /* Build configuration list for PBXProject "the night life app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				031CAB182D4B74CA00923A27 /* Debug */,
+				031CAB192D4B74CA00923A27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		031CAB1A2D4B74CA00923A27 /* Build configuration list for PBXNativeTarget "the night life app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				031CAB1B2D4B74CA00923A27 /* Debug */,
+				031CAB1C2D4B74CA00923A27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		031CAB1D2D4B74CA00923A27 /* Build configuration list for PBXNativeTarget "the night life appTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				031CAB1E2D4B74CA00923A27 /* Debug */,
+				031CAB1F2D4B74CA00923A27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		031CAB202D4B74CA00923A27 /* Build configuration list for PBXNativeTarget "the night life appUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				031CAB212D4B74CA00923A27 /* Debug */,
+				031CAB222D4B74CA00923A27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		031CAB5E2D4BB62E00923A27 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.3;
+			};
+		};
+		03620F1B2D4BDB03005819FD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		031CAB5F2D4BB62E00923A27 /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 031CAB5E2D4BB62E00923A27 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
+		};
+		03620F1C2D4BDB03005819FD /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03620F1B2D4BDB03005819FD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		03620F1E2D4BDB03005819FD /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03620F1B2D4BDB03005819FD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		03620F202D4BDB03005819FD /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03620F1B2D4BDB03005819FD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		03620F222D4BDB03005819FD /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03620F1B2D4BDB03005819FD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		03620F242D4BDB03005819FD /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03620F1B2D4BDB03005819FD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		03620F272D4BDBBC005819FD /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03620F1B2D4BDB03005819FD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 031CAAEE2D4B74C800923A27 /* Project object */;
+}

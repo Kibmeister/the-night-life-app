@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAvzBzkANW7uUzju5sgmzXmcio6A6Ph0Ck</string>
+	<key>GCM_SENDER_ID</key>
+	<string>487222607435</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>no.vrity.the-night-life-app</string>
+	<key>PROJECT_ID</key>
+	<string>the-night-life-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>the-night-life-app.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:487222607435:ios:7645497c91fca9bcb317ce</string>
+</dict>
+</plist>
