@@ -11,12 +11,6 @@ struct VenueListView: View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 VStack(spacing: 0) {
-                    // Kategori-filter bar
-                    CategoryTagsView(selectedCategory: $selectedCategory)
-                        .padding(.vertical)
-                        .background(Color.white)
-                        .zIndex(99)
-                    
                     // Hoved innhold (enten liste eller kart)
                     ZStack {
                         if !isMapView {
@@ -43,12 +37,18 @@ struct VenueListView: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing:    // Endret fra 'leading' til 'trailing'
-                Button(action: { showingSearchModal = true }) {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.black)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    CategoryTagsView(selectedCategory: $selectedCategory)
                 }
-            )
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showingSearchModal = true }) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.black)
+                    }
+                }
+            }
             .sheet(isPresented: $showingSearchModal) {
                 SearchModalView(
                     isPresented: $showingSearchModal,

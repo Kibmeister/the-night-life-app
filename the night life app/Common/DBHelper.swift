@@ -18,8 +18,8 @@ class DBHelper {
     private let crowdLevel = SQLite.Expression<String>("crowd_level")
     private let musicGenre = SQLite.Expression<String>("music_genre")
     private let description = SQLite.Expression<String>("description")
-    private let latitude = SQLite.Expression<Double>("latitude")
-    private let longitude = SQLite.Expression<Double>("longitude")
+    private let latitude = SQLite.Expression<Double?>("latitude")
+    private let longitude = SQLite.Expression<Double?>("longitude")
     
     private init() {
         do {
@@ -58,8 +58,8 @@ class DBHelper {
                 table.column(crowdLevel)
                 table.column(musicGenre)
                 table.column(description)
-                table.column(latitude)
-                table.column(longitude)
+                table.column(latitude, defaultValue: nil)
+                table.column(longitude, defaultValue: nil)
             })
         )} catch {
             print("Table creation error: \(error)")
@@ -79,8 +79,8 @@ class DBHelper {
                 crowdLevel <- venue.crowdLevel.rawValue,
                 musicGenre <- venue.musicGenre,
                 description <- venue.description,
-                latitude <- venue.latitude,
-                longitude <- venue.longitude
+                latitude <- venue.latitude ?? 0.0,
+                longitude <- venue.longitude ?? 0.0
             )
             
             try db?.run(insert)
@@ -98,8 +98,9 @@ class DBHelper {
             guard let db = db else { return [] }
             
             for venue in try db.prepare(venues) {
-                if let venueType = VenueType(rawValue: venue[type]),
-                   let crowdLevelEnum = Venue.CrowdLevel(rawValue: venue[crowdLevel]) {
+                if let venueType = VenueType(rawValue: venue[type]) {
+                    // Spesifiserer typen eksplisitt for å unngå tvetydighet
+                    let crowdLevelEnum = Venue.CrowdLevel(rawValue: venue[crowdLevel]) ?? .medium
                     
                     let venueObject = Venue(
                         id: Int(venue[id]),
@@ -107,7 +108,7 @@ class DBHelper {
                         type: venueType,
                         images: [venue[image]],
                         isOpen: venue[isOpen],
-                        ageLimit: 18, // Dette bør legges til i databasen
+                        ageLimit: 18,
                         entryFee: venue[entryFee].map { Int($0) },
                         hasCoatCheck: venue[hasCoatCheck],
                         musicGenre: venue[musicGenre],
@@ -140,8 +141,8 @@ class DBHelper {
                 crowdLevel <- venue.crowdLevel.rawValue,
                 musicGenre <- venue.musicGenre,
                 description <- venue.description,
-                latitude <- venue.latitude,
-                longitude <- venue.longitude
+                latitude <- venue.latitude ?? 0.0,
+                longitude <- venue.longitude ?? 0.0
             ))
             
             return true

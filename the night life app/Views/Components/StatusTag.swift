@@ -8,6 +8,8 @@ struct StatusTag: View {
         Text(text)
             .font(.caption)
             .fontWeight(.medium)
+            .lineLimit(1)  // Forhindrer text wrapping
+            .fixedSize(horizontal: true, vertical: false)  // Lar taggen ekspandere i bredden
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
             .background(Color.black.opacity(0.2))
