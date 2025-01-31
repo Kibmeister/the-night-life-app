@@ -6,6 +6,7 @@ struct VenueListView: View {
     @State private var isMapView: Bool = false
     @State private var showingSearchModal = false
     @State private var searchText = ""
+    @State private var isPreviewActive: Bool = false
     
     var body: some View {
         NavigationView {
@@ -24,7 +25,9 @@ struct VenueListView: View {
                                 .padding(.bottom, 80)
                             }
                         } else {
-                            VenueMapView(venues: viewModel.filteredVenues)
+                            VenueMapView(venues: viewModel.filteredVenues, 
+                                       isMapView: $isMapView, 
+                                       isPreviewActive: $isPreviewActive)
                         }
                     }
                 }
@@ -32,7 +35,8 @@ struct VenueListView: View {
                 // Toggle-knapp
                 VStack {
                     Spacer()
-                    ViewToggleButton(isMapView: $isMapView)
+                    ViewToggleButton(isMapView: $isMapView, 
+                                   isPreviewActive: isPreviewActive)
                         .padding(.bottom, 30)
                 }
             }

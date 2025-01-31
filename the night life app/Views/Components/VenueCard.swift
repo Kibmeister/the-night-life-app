@@ -4,7 +4,7 @@ import CoreLocation
 struct VenueCard: View {
     let venue: Venue
     @StateObject private var locationManager = LocationManager()
-    @State private var cachedImage: UIImage?
+    @StateObject private var imageLoader = ImageLoader()
     
     // Hjelpefunksjon for å formatere avstanden
     private func formatDistance() -> String {
@@ -30,29 +30,18 @@ struct VenueCard: View {
             VStack(spacing: 0) {
                 // Bakgrunnsbilde
                 if let firstImage = venue.images.first {
-                    if let cached = cachedImage {
-                        Image(uiImage: cached)
+                    if let image = imageLoader.image {
+                        Image(uiImage: image)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 340)
                             .clipped()
                     } else {
-                        AsyncImage(url: URL(string: firstImage)) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 340)
-                                .clipped()
-                                .onAppear {
-                                    // Cache bildet når det lastes
-                                    if let data = try? Data(contentsOf: URL(string: firstImage)!),
-                                       let image = UIImage(data: data) {
-                                        cachedImage = image
-                                    }
-                                }
-                        } placeholder: {
-                            Color.gray.opacity(0.2)
-                        }
+                        Color.gray.opacity(0.2)
+                            .frame(width: 340, height: 200)
+                            .onAppear {
+                                imageLoader.load(from: firstImage)
+                            }
                     }
                 }
                 
@@ -105,6 +94,9 @@ struct VenueCard: View {
             )
         }
         .buttonStyle(PlainButtonStyle())
+        .onDisappear {
+            imageLoader.cancel()
+        }
     }
 }
 
