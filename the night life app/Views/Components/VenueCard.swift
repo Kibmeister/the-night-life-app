@@ -5,52 +5,59 @@ struct VenueCard: View {
     
     var body: some View {
         NavigationLink(destination: VenueDetailView(venue: venue)) {
-            ZStack(alignment: .leading) {
+            VStack(spacing: 0) {
                 // Bakgrunnsbilde
                 if let firstImage = venue.images.first {
                     AsyncImage(url: URL(string: firstImage)) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 320, height: 400)
+                            .frame(width: 340)
                             .clipped()
                     } placeholder: {
                         Color.gray.opacity(0.2)
                     }
+                    .frame(maxHeight: .infinity, alignment: .top)
                 }
                 
-                // Venue informasjon overlay
+                // Informasjonscontainer
                 VStack(alignment: .leading, spacing: 12) {
                     Text(venue.name)
                         .font(.title2)
                         .bold()
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                     
-                    // Tags
+                    // Tags container
                     VStack(alignment: .leading, spacing: 8) {
-                        HStack(spacing: 8) {
-                            StatusTag(text: venue.type.rawValue, isActive: true)
-                            StatusTag(text: "\(venue.ageLimit)+", isActive: true)
-                            if let fee = venue.entryFee {
-                                StatusTag(text: "\(fee)kr", isActive: true)
+                        HStack {
+                            // Venstre-alignede tags
+                            VStack(alignment: .leading, spacing: 8) {
+                                HStack(spacing: 8) {
+                                    StatusTag(text: venue.type.rawValue, isActive: true)
+                                    StatusTag(text: "\(venue.ageLimit)+", isActive: true)
+                                    if let fee = venue.entryFee {
+                                        StatusTag(text: "\(fee)kr", isActive: true)
+                                    }
+                                }
+                                
+                                StatusTag(text: venue.musicGenre, isActive: true)
                             }
+                            
+                            Spacer()
+                            
+                            // Høyre-alignet åpningstidstag
+                            StatusTag(text: venue.isOpen ? "Åpen" : "Stengt", 
+                                    isActive: venue.isOpen)
                         }
-                        
-                        StatusTag(text: venue.musicGenre, isActive: true)
-                    }
-                    
-                    Spacer()
-                    
-                    // Åpen/Stengt tag i nedre høyre hjørne
-                    HStack {
-                        Spacer()
-                        StatusTag(text: venue.isOpen ? "Åpen" : "Stengt", 
-                                isActive: venue.isOpen)
                     }
                 }
-                .padding()
+                .padding(.vertical, 24)
+                .padding(.horizontal)
+                .frame(maxWidth: .infinity)
+                .background(Color.black.opacity(0.1))
             }
-            .frame(width: 320, height: 400)
+            .frame(width: 340, height: 550)
+            .background(Color.clear)
             .cornerRadius(20)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
@@ -94,4 +101,4 @@ struct VenueCard_Previews: PreviewProvider {
         ))
         .padding()
     }
-} 
+}
