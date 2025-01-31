@@ -35,6 +35,7 @@ struct VenueMapView: View {
                         }
                     } else {
                         Button(action: {
+                            print("Pin klikket for venue: \(venue.name)")
                             withAnimation {
                                 selectedVenue = venue
                             }
@@ -49,6 +50,9 @@ struct VenueMapView: View {
                                     .fontWeight(.bold)
                             }
                         }
+                        .onAppear {
+                            print("Pin lagt til på kartet for: \(venue.name)")
+                        }
                     }
                 }
             }
@@ -59,36 +63,73 @@ struct VenueMapView: View {
                 }
             }
             
-            // My Location knapp
+            // My Location og zoom-knapper
             VStack {
+                Spacer()
                 HStack {
-                    Button(action: {
-                        showingUserLocation.toggle()
-                        if showingUserLocation {
-                            if let location = locationManager.userLocation {
-                                withAnimation {
-                                    region.center = location.coordinate
-                                    region.span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                    Spacer()
+                    VStack(spacing: 12) {
+                        // Zoom inn knapp
+                        Button(action: {
+                            withAnimation {
+                                region.span = MKCoordinateSpan(
+                                    latitudeDelta: region.span.latitudeDelta * 0.5,
+                                    longitudeDelta: region.span.longitudeDelta * 0.5
+                                )
+                            }
+                        }) {
+                            Image(systemName: "plus")
+                                .font(.title2)
+                                .padding(12)
+                                .background(Color.white)
+                                .clipShape(Circle())
+                                .shadow(radius: 4)
+                        }
+                        
+                        // Zoom ut knapp
+                        Button(action: {
+                            withAnimation {
+                                region.span = MKCoordinateSpan(
+                                    latitudeDelta: region.span.latitudeDelta * 2.0,
+                                    longitudeDelta: region.span.longitudeDelta * 2.0
+                                )
+                            }
+                        }) {
+                            Image(systemName: "minus")
+                                .font(.title2)
+                                .padding(12)
+                                .background(Color.white)
+                                .clipShape(Circle())
+                                .shadow(radius: 4)
+                        }
+                        
+                        // Min posisjon knapp
+                        Button(action: {
+                            showingUserLocation.toggle()
+                            if showingUserLocation {
+                                if let location = locationManager.userLocation {
+                                    withAnimation {
+                                        region.center = location.coordinate
+                                        region.span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                                    }
                                 }
                             }
+                        }) {
+                            Image(systemName: showingUserLocation ? "location.fill" : "location")
+                                .font(.title2)
+                                .padding(12)
+                                .background(Color.white)
+                                .clipShape(Circle())
+                                .shadow(radius: 4)
                         }
-                    }) {
-                        Image(systemName: showingUserLocation ? "location.fill" : "location")
-                            .font(.title2)
-                            .padding(12)
-                            .background(Color.white)
-                            .clipShape(Circle())
-                            .shadow(radius: 4)
                     }
                     .padding()
-                    Spacer()
                 }
-                Spacer()
                 
                 // Toggle-knapp som kun vises når ingen venue er valgt
                 if selectedVenue == nil {
                     ViewToggleButton(isMapView: $isMapView, 
-                                    isPreviewActive: selectedVenue != nil)  // Bruker direkte verdi
+                                    isPreviewActive: selectedVenue != nil)
                         .padding(.bottom, 30)
                 }
             }

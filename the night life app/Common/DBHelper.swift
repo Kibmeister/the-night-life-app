@@ -30,21 +30,22 @@ class DBHelper {
             let dbPath = "\(path)/venues.sqlite3"
             print("Database path: \(dbPath)")
             
-            // Kun opprett ny database hvis den ikke eksisterer
+            // Sjekk om databasen eksisterer
             let databaseExists = FileManager.default.fileExists(atPath: dbPath)
             
             db = try Connection(dbPath)
             
             if !databaseExists {
-                print("Oppretter ny database")
+                print("Oppretter ny database og initialiserer venues...")
                 createTable()
+                initializeVenues()
             }
+            
         } catch {
             print("Database initialization error: \(error)")
         }
     }
     
-
     private func createTable() {
         do {
             try db?.run(venues.create(ifNotExists: true, block:  { table in
@@ -63,6 +64,90 @@ class DBHelper {
             })
         )} catch {
             print("Table creation error: \(error)")
+        }
+    }
+    
+    private func initializeVenues() {
+        let venues = [
+            Venue(
+                id: 1,
+                name: "The Villa",
+                type: .nightclub,
+                images: ["villa_image"],
+                isOpen: true,
+                ageLimit: 23,
+                entryFee: 200,
+                hasCoatCheck: true,
+                musicGenre: "House/Techno",
+                crowdLevel: .high,
+                description: "Oslos mest eksklusive nattklubb med fokus på elektronisk musikk.",
+                latitude: 59.91657,
+                longitude: 10.74926
+            ),
+            Venue(
+                id: 2,
+                name: "Blå",
+                type: .nightclub,
+                images: ["bla_image"],
+                isOpen: true,
+                ageLimit: 20,
+                entryFee: 150,
+                hasCoatCheck: true,
+                musicGenre: "Jazz/Electronic",
+                crowdLevel: .medium,
+                description: "Legendarisk venue kjent for jazz og elektronisk musikk.",
+                latitude: 59.91829,
+                longitude: 10.75246
+            ),
+            Venue(
+                id: 3,
+                name: "Kulturhuset",
+                type: .bar,
+                images: ["kulturhuset_image"],
+                isOpen: true,
+                ageLimit: 20,
+                entryFee: nil,
+                hasCoatCheck: true,
+                musicGenre: "Variert",
+                crowdLevel: .medium,
+                description: "Seks etasjer med ulike barer og aktiviteter.",
+                latitude: 59.91461,
+                longitude: 10.74872
+            ),
+            Venue(
+                id: 4,
+                name: "Tilt",
+                type: .arcade,
+                images: ["tilt_image"],
+                isOpen: true,
+                ageLimit: 20,
+                entryFee: nil,
+                hasCoatCheck: false,
+                musicGenre: "Rock/Pop",
+                crowdLevel: .medium,
+                description: "Spillbar med flipperspill, arkadespill og godt utvalg av øl.",
+                latitude: 59.91616,
+                longitude: 10.74099
+            ),
+            Venue(
+                id: 5,
+                name: "Jaeger",
+                type: .nightclub,
+                images: ["jaeger_image"],
+                isOpen: true,
+                ageLimit: 21,
+                entryFee: 150,
+                hasCoatCheck: true,
+                musicGenre: "Techno/House",
+                crowdLevel: .high,
+                description: "Underground nattklubb med fokus på elektronisk musikk.",
+                latitude: 59.91461,
+                longitude: 10.75016
+            )
+        ]
+        
+        for venue in venues {
+            _ = insertVenue(venue)
         }
     }
     
@@ -161,5 +246,37 @@ class DBHelper {
             print("Delete error: \(error)")
             return false
         }
+    }
+    
+    func updateVenueLocation(id venueId: Int, latitude: Double, longitude: Double) -> Bool {
+        do {
+            let venueRecord = venues.filter(self.id == Int64(venueId))
+            try db?.run(venueRecord.update(
+                self.latitude <- latitude,
+                self.longitude <- longitude
+            ))
+            return true
+        } catch {
+            print("Update location error: \(error)")
+            return false
+        }
+    }
+    
+    // Funksjon for å oppdatere alle lokasjoner
+    func updateAllLocations() {
+        // The Villa - Møllergata 23
+        updateVenueLocation(id: 1, latitude: 59.91657, longitude: 10.74926)
+        
+        // Blå - Brenneriveien 9C
+        updateVenueLocation(id: 2, latitude: 59.91829, longitude: 10.75246)
+        
+        // Kulturhuset - Youngstorget 3
+        updateVenueLocation(id: 3, latitude: 59.91461, longitude: 10.74872)
+        
+        // Tilt - Torggata 16
+        updateVenueLocation(id: 4, latitude: 59.91616, longitude: 10.74099)
+        
+        // Jaeger - Grensen 9
+        updateVenueLocation(id: 5, latitude: 59.91461, longitude: 10.75016)
     }
 }

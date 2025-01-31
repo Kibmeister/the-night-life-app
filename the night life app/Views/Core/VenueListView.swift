@@ -26,17 +26,15 @@ struct VenueListView: View {
                             }
                         } else {
                             VenueMapView(venues: viewModel.filteredVenues, 
-                                       isMapView: $isMapView, 
+                                       isMapView: $isMapView,
                                        isPreviewActive: $isPreviewActive)
                         }
                     }
                 }
                 
                 // Toggle-knapp
-                VStack {
-                    Spacer()
-                    ViewToggleButton(isMapView: $isMapView, 
-                                   isPreviewActive: isPreviewActive)
+                if !isPreviewActive {
+                    ViewToggleButton(isMapView: $isMapView, isPreviewActive: isPreviewActive)
                         .padding(.bottom, 30)
                 }
             }

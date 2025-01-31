@@ -8,6 +8,9 @@ class VenueViewModel: ObservableObject {
     private let dbHelper = DBHelper.shared
     
     init() {
+        // Oppdater lokasjoner først
+        dbHelper.updateAllLocations()
+        // Deretter last venues
         loadVenues()
     }
     
@@ -17,10 +20,16 @@ class VenueViewModel: ObservableObject {
         // Initialiser filteredVenues med alle venues
         filteredVenues = venues
         
-        // Debug utskrift
-        print("Loaded venues: \(venues.count)")
+        // Detaljert debug utskrift
+        print("\n=== VENUES I DATABASEN ===")
         venues.forEach { venue in
-            print("Venue: \(venue.name), Type: \(venue.type.rawValue)")
+            print("""
+                  ID: \(venue.id)
+                  Navn: \(venue.name)
+                  Type: \(venue.type.rawValue)
+                  Koordinater: \(venue.latitude ?? 0), \(venue.longitude ?? 0)
+                  ----------------------
+                  """)
         }
     }
     
