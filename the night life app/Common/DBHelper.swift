@@ -18,17 +18,27 @@ class DBHelper {
     private let crowdLevel = SQLite.Expression<String>("crowd_level")
     private let musicGenre = SQLite.Expression<String>("music_genre")
     private let description = SQLite.Expression<String>("description")
+    private let latitude = SQLite.Expression<Double>("latitude")
+    private let longitude = SQLite.Expression<Double>("longitude")
     
     private init() {
         do {
             let path = NSSearchPathForDirectoriesInDomains(
                 .documentDirectory, .userDomainMask, true
             ).first!
-        
-            print("Database path: \(path)/venues.sqlite3") 
-             // Legg til denne linjen
-            db = try Connection("\(path)/venues.sqlite3")
-            createTable()
+            
+            let dbPath = "\(path)/venues.sqlite3"
+            print("Database path: \(dbPath)")
+            
+            // Kun opprett ny database hvis den ikke eksisterer
+            let databaseExists = FileManager.default.fileExists(atPath: dbPath)
+            
+            db = try Connection(dbPath)
+            
+            if !databaseExists {
+                print("Oppretter ny database")
+                createTable()
+            }
         } catch {
             print("Database initialization error: \(error)")
         }
@@ -48,6 +58,8 @@ class DBHelper {
                 table.column(crowdLevel)
                 table.column(musicGenre)
                 table.column(description)
+                table.column(latitude)
+                table.column(longitude)
             })
         )} catch {
             print("Table creation error: \(error)")
@@ -66,7 +78,9 @@ class DBHelper {
                 hasCoatCheck <- venue.hasCoatCheck,
                 crowdLevel <- venue.crowdLevel.rawValue,
                 musicGenre <- venue.musicGenre,
-                description <- venue.description
+                description <- venue.description,
+                latitude <- venue.latitude,
+                longitude <- venue.longitude
             )
             
             try db?.run(insert)
@@ -98,7 +112,9 @@ class DBHelper {
                         hasCoatCheck: venue[hasCoatCheck],
                         musicGenre: venue[musicGenre],
                         crowdLevel: crowdLevelEnum,
-                        description: venue[description]
+                        description: venue[description],
+                        latitude: venue[latitude],
+                        longitude: venue[longitude]
                     )
                     venueList.append(venueObject)
                 }
@@ -123,7 +139,9 @@ class DBHelper {
                 hasCoatCheck <- venue.hasCoatCheck,
                 crowdLevel <- venue.crowdLevel.rawValue,
                 musicGenre <- venue.musicGenre,
-                description <- venue.description
+                description <- venue.description,
+                latitude <- venue.latitude,
+                longitude <- venue.longitude
             ))
             
             return true

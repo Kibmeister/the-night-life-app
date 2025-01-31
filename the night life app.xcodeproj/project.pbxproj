@@ -93,9 +93,9 @@
 			isa = PBXGroup;
 			children = (
 				031CAAF82D4B74C800923A27 /* the night life app */,
+				03620F262D4BDBBC005819FD /* Frameworks */,
 				031CAB092D4B74CA00923A27 /* the night life appTests */,
 				031CAB132D4B74CA00923A27 /* the night life appUITests */,
-				03620F262D4BDBBC005819FD /* Frameworks */,
 				031CAAF72D4B74C800923A27 /* Products */,
 			);
 			sourceTree = "<group>";

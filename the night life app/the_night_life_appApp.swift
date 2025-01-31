@@ -32,7 +32,7 @@ struct the_night_life_appApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ContentView()
+                VenueListView()
             }
         }
     }

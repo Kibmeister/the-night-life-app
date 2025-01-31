@@ -97,7 +97,9 @@ struct VenueCard_Previews: PreviewProvider {
             hasCoatCheck: true,
             musicGenre: "Pop",
             crowdLevel: .medium,
-            description: "Test description"
+            description: "Test description",
+            latitude: 59.9139,
+            longitude: 10.7522
         ))
         .padding()
     }

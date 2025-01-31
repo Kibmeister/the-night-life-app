@@ -87,7 +87,9 @@ struct VenueDetailView_Previews: PreviewProvider {
                 hasCoatCheck: true,
                 musicGenre: "Pop/Rock",
                 crowdLevel: .medium,
-                description: "Et koselig sted i hjertet av byen med god stemning og kalde drikker."
+                description: "Et koselig sted i hjertet av byen med god stemning og kalde drikker.",
+                latitude: 59.9139,
+                longitude: 10.7522
             ))
         }
     }

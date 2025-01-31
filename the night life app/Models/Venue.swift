@@ -1,3 +1,5 @@
+import MapKit
+
 struct Venue: Identifiable {
     let id: Int
     let name: String
@@ -10,6 +12,12 @@ struct Venue: Identifiable {
     let musicGenre: String
     var crowdLevel: CrowdLevel
     let description: String
+    let latitude: Double
+    let longitude: Double
+    
+    var coordinate: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
     
     enum CrowdLevel: String {
         case low = "Få gjester"

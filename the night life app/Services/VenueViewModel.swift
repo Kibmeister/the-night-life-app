@@ -7,27 +7,13 @@ class VenueViewModel: ObservableObject {
     private let storageService = StorageService.shared
     
     init() {
-        // Test at bildene er tilgjengelige
-        for imageName in ["kulturhuset_image", "blaa_image", "villa_image", "tilt_image", 
-                         "jaeger_image", "dattera_image", "mekaniske_image", "reef_image", 
-                         "elsker_image", "himkok_image"] {
-            if UIImage(named: imageName) != nil {
-                print("✅ Fant bilde: \(imageName)")
-            } else {
-                print("❌ Mangler bilde: \(imageName)")
-            }
-        }
-        
-        // Last først eksisterende venues fra databasen
+        // Last venues fra databasen
         loadVenues()
         
-        // Hvis det ikke finnes noen venues, populer databasen
+        // Hvis databasen er tom, populer den
         if venues.isEmpty {
             Task {
-                await populateVenuesWithImages()
-                await MainActor.run {
-                    loadVenues()
-                }
+                await populateInitialData()
             }
         }
     }
@@ -35,12 +21,12 @@ class VenueViewModel: ObservableObject {
     private func loadVenues() {
         venues = dbHelper.fetchVenues()
         filteredVenues = venues
-        print("Antall venues lastet: \(venues.count)")  // Debug print
+        print("Antall venues lastet: \(venues.count)")
     }
     
-    @MainActor
-    private func populateVenuesWithImages() async {
-        print("Starter populering av database...")  // Debug print
+    // Ny funksjon som kan kalles manuelt når vi trenger å oppdatere data
+    func populateInitialData() async {
+        print("Starter populering av database...")
         
         let newVenues = [
             (venue: Venue(id: 1,
@@ -53,7 +39,9 @@ class VenueViewModel: ObservableObject {
                          hasCoatCheck: true,
                          musicGenre: "House/Techno",
                          crowdLevel: .high,
-                         description: "Populært kulturhus med flere etasjer og forskjellige barer"),
+                         description: "Populært kulturhus med flere etasjer og forskjellige barer",
+                         latitude: 59.9137,
+                         longitude: 10.7516),
              imageName: "kulturhuset_image"),
             
             (venue: Venue(id: 2,
@@ -66,7 +54,9 @@ class VenueViewModel: ObservableObject {
                          hasCoatCheck: true,
                          musicGenre: "Jazz/Live",
                          crowdLevel: .medium,
-                         description: "Legendarisk jazzklubb og konsertsted ved Akerselva"),
+                         description: "Legendarisk jazzklubb og konsertsted ved Akerselva",
+                         latitude: 59.9201,
+                         longitude: 10.7524),
              imageName: "blaa_image"),
             
             (venue: Venue(id: 3,
@@ -79,7 +69,9 @@ class VenueViewModel: ObservableObject {
                          hasCoatCheck: true,
                          musicGenre: "Electronic/House",
                          crowdLevel: .high,
-                         description: "Oslos beste nattklubb for elektronisk musikk"),
+                         description: "Oslos beste nattklubb for elektronisk musikk",
+                         latitude: 59.9133,
+                         longitude: 10.7506),
              imageName: "villa_image"),
             
             (venue: Venue(id: 4,
@@ -92,7 +84,9 @@ class VenueViewModel: ObservableObject {
                          hasCoatCheck: false,
                          musicGenre: "Retro Gaming",
                          crowdLevel: .medium,
-                         description: "Spillbar med arkadespill og flipperspill"),
+                         description: "Spillbar med arkadespill og flipperspill",
+                         latitude: 59.9145,
+                         longitude: 10.7505),
              imageName: "tilt_image"),
             
             (venue: Venue(id: 5,
@@ -105,7 +99,9 @@ class VenueViewModel: ObservableObject {
                          hasCoatCheck: true,
                          musicGenre: "Techno/House",
                          crowdLevel: .high,
-                         description: "Underground nattklubb med topp lydanlegg"),
+                         description: "Underground nattklubb med topp lydanlegg",
+                         latitude: 59.9156,
+                         longitude: 10.7516),
              imageName: "jaeger_image"),
             
             (venue: Venue(id: 6,
@@ -118,7 +114,9 @@ class VenueViewModel: ObservableObject {
                          hasCoatCheck: false,
                          musicGenre: "Indie/Alternative",
                          crowdLevel: .medium,
-                         description: "Koselig bar med uteservering og god stemning"),
+                         description: "Koselig bar med uteservering og god stemning",
+                         latitude: 59.9167,
+                         longitude: 10.7528),
              imageName: "dattera_image"),
             
             (venue: Venue(id: 7,
@@ -131,7 +129,9 @@ class VenueViewModel: ObservableObject {
                          hasCoatCheck: true,
                          musicGenre: "Ambient/Chill",
                          crowdLevel: .low,
-                         description: "Historisk pub i gamle industrilokaler"),
+                         description: "Historisk pub i gamle industrilokaler",
+                         latitude: 59.9172,
+                         longitude: 10.7515),
              imageName: "mekaniske_image"),
             
             (venue: Venue(id: 8,
@@ -144,7 +144,9 @@ class VenueViewModel: ObservableObject {
                          hasCoatCheck: true,
                          musicGenre: "Pop/RnB",
                          crowdLevel: .high,
-                         description: "Populær sports- og partybar i sentrum"),
+                         description: "Populær sports- og partybar i sentrum",
+                         latitude: 59.9142,
+                         longitude: 10.7535),
              imageName: "reef_image"),
             
             (venue: Venue(id: 9,
@@ -157,7 +159,9 @@ class VenueViewModel: ObservableObject {
                          hasCoatCheck: true,
                          musicGenre: "Pop/Dance",
                          crowdLevel: .high,
-                         description: "LHBT+-vennlig nattklubb med god stemning"),
+                         description: "LHBT+-vennlig nattklubb med god stemning",
+                         latitude: 59.9147,
+                         longitude: 10.7498),
              imageName: "elsker_image"),
             
             (venue: Venue(id: 10,
@@ -170,33 +174,34 @@ class VenueViewModel: ObservableObject {
                          hasCoatCheck: false,
                          musicGenre: "Lounge/Jazz",
                          crowdLevel: .medium,
-                         description: "Prisbelønnet cocktailbar med unik atmosfære"),
+                         description: "Prisbelønnet cocktailbar med unik atmosfære",
+                         latitude: 59.9161,
+                         longitude: 10.7509),
              imageName: "himkok_image")
         ]
         
-        // Slett eksisterende data
-        for venue in dbHelper.fetchVenues() {
-            _ = dbHelper.deleteVenue(id: venue.id)
-        }
-        
-        // Last opp bilder og lagre venues
-        for (venue, imageName) in newVenues {
-            if let image = UIImage(named: imageName) {
-                do {
-                    let imageUrl = try await storageService.uploadImage(image, venueName: venue.name)
-                    var venueWithImage = venue
-                    venueWithImage.images = [imageUrl]
-                    let success = dbHelper.insertVenue(venueWithImage)
-                    print("Lastet opp bilde for \(venue.name): \(success ? "suksess" : "feilet")")
-                } catch {
-                    print("Feil ved opplasting av bilde for \(venue.name): \(error)")
+        // Last opp bilder og lagre venues kun hvis databasen er tom
+        if dbHelper.fetchVenues().isEmpty {
+            for (venue, imageName) in newVenues {
+                if let image = UIImage(named: imageName) {
+                    do {
+                        let imageUrl = try await storageService.uploadImage(image, venueName: venue.name)
+                        var venueWithImage = venue
+                        venueWithImage.images = [imageUrl]
+                        let success = dbHelper.insertVenue(venueWithImage)
+                        print("Lastet opp bilde for \(venue.name): \(success ? "suksess" : "feilet")")
+                    } catch {
+                        print("Feil ved opplasting av bilde for \(venue.name): \(error)")
+                    }
                 }
-            } else {
-                print("Fant ikke bilde: \(imageName)")
             }
+            
+            await MainActor.run {
+                loadVenues()
+            }
+            
+            print("Database populering fullført")
         }
-        
-        print("Database populering fullført")  // Debug print
     }
     
     func filterVenues(by type: VenueType?) {
@@ -205,7 +210,6 @@ class VenueViewModel: ObservableObject {
         } else {
             filteredVenues = venues
         }
-        print("Filtrerte venues: \(filteredVenues.count)")  // Debug print
     }
     
     // Legg til ny metode for å laste opp bilde
@@ -221,3 +225,4 @@ class VenueViewModel: ObservableObject {
         loadVenues()  // Oppdater venues liste
     }
 } 
+
