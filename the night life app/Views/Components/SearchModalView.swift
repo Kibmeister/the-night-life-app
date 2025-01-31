@@ -1,10 +1,13 @@
 import SwiftUI
+import Inject
 
 struct SearchModalView: View {
+    @ObserveInjection var inject
     @Binding var isPresented: Bool
     @Binding var searchText: String
     let venues: [Venue]
     @Environment(\.dismiss) var dismiss
+    @StateObject private var viewModel = SearchViewModel()
     
     var filteredVenues: [Venue] {
         if searchText.isEmpty {
@@ -67,5 +70,6 @@ struct SearchModalView: View {
             }
             .background(Color.white)
         }
+        .enableInjection()
     }
 }

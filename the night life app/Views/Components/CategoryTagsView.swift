@@ -1,26 +1,35 @@
 import SwiftUI
+import Inject
 
 struct CategoryTagsView: View {
+    @ObserveInjection var inject
     @Binding var selectedCategory: VenueType?
+    
+    // Flytter tap-logikken til en egen funksjon
+    private func handleCategoryTap(_ type: VenueType) {
+        withAnimation {
+            selectedCategory = (selectedCategory == type) ? nil : type
+        }
+    }
+    
+    // Lager en egen view for kategorilisten
+    private var categoryList: some View {
+        HStack(spacing: 12) {
+            ForEach(VenueType.allCases, id: \.self) { type in
+                CategoryTag(text: type.rawValue, isSelected: selectedCategory == type)
+                    .onTapGesture {
+                        handleCategoryTap(type)
+                    }
+            }
+        }
+        .padding(.horizontal)
+    }
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 12) {
-                ForEach(VenueType.allCases, id: \.self) { type in
-                    CategoryTag(type: type, isSelected: selectedCategory == type)
-                        .onTapGesture {
-                            withAnimation {
-                                if selectedCategory == type {
-                                    selectedCategory = nil  // Fjern filteret hvis samme kategori velges igjen
-                                } else {
-                                    selectedCategory = type // Velg ny kategori
-                                }
-                            }
-                        }
-                }
-            }
-            .padding(.horizontal)
+            categoryList
         }
+        .enableInjection()
     }
 }
 

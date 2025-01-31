@@ -7,33 +7,25 @@
 
 import SwiftUI
 import FirebaseCore
+import FirebaseStorage
+@_exported import Inject
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
-        
-        // Debug print for å sjekke om config-filen er funnet
-        if let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") {
-            print("Firebase config file found at: \(path)")
-        } else {
-            print("ERROR: GoogleService-Info.plist not found!")
-        }
-        
+        FirebaseConfig.configure()  // Bruker vår egen konfigurasjonsfil
         return true
     }
 }
 
 @main
 struct the_night_life_appApp: App {
-    // Registrer app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                VenueListView()
-            }
+            VenueListView()
+                .enableInjection()
         }
     }
 }

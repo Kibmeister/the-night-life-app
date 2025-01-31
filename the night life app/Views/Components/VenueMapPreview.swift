@@ -1,7 +1,9 @@
 import SwiftUI
 import CoreLocation
+import Inject
 
 struct VenueMapPreview: View {
+    @ObserveInjection var inject
     let venue: Venue
     @StateObject private var locationManager = LocationManager()
     
@@ -54,6 +56,7 @@ struct VenueMapPreview: View {
             .cornerRadius(12, corners: [.topLeft, .topRight])
         }
         .buttonStyle(PlainButtonStyle())  // Beholder standard touch feedback
+        .enableInjection()
     }
 }
 

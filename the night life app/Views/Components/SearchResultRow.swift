@@ -1,11 +1,13 @@
 import SwiftUI
+import Inject
 
 struct SearchResultRow: View {
+    @ObserveInjection var inject
     let venue: Venue
     let onTap: () -> Void
     
     var body: some View {
-        Button(action: onTap) {
+        NavigationLink(destination: VenueDetailView(venue: venue)) {
             HStack {
                 Text(venue.name)
                     .foregroundColor(.primary)
@@ -16,5 +18,6 @@ struct SearchResultRow: View {
             .padding()
             .background(Color.white)
         }
+        .enableInjection()
     }
 } 

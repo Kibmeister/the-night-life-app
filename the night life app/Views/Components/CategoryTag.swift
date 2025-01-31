@@ -1,18 +1,23 @@
 import SwiftUI
+import Inject
 
 struct CategoryTag: View {
-    let type: VenueType
+    @ObserveInjection var inject
+    let text: String
     let isSelected: Bool
     
     var body: some View {
-        Text(type.rawValue)
-            .font(.subheadline)
-            .fontWeight(.medium)
+        Text(text)
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
-            .background(isSelected ? Color.blue : Color.gray.opacity(0.2))
-            .foregroundColor(isSelected ? .white : .primary)
+            .background(isSelected ? Color.black : Color.clear)
+            .foregroundColor(isSelected ? .white : .black)
             .cornerRadius(20)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.black, lineWidth: 1)
+            )
+            .enableInjection()
     }
 }
 
@@ -20,8 +25,8 @@ struct CategoryTag: View {
 struct CategoryTag_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
-            CategoryTag(type: .bar, isSelected: true)
-            CategoryTag(type: .pub, isSelected: false)
+            CategoryTag(text: "Bar", isSelected: true)
+            CategoryTag(text: "Pub", isSelected: false)
         }
         .padding()
     }

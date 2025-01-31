@@ -4,7 +4,7 @@ struct Venue: Identifiable, Codable {
     let id: Int
     let name: String
     let type: VenueType
-    var images: [String]
+    let image: String
     var isOpen: Bool
     let ageLimit: Int
     let entryFee: Int?

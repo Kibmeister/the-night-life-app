@@ -1,7 +1,9 @@
 import SwiftUI
 import MapKit
+import Inject
 
 struct VenueMapView: View {
+    @ObserveInjection var inject
     let venues: [Venue]
     @Binding var isMapView: Bool
     @Binding var isPreviewActive: Bool
@@ -140,6 +142,7 @@ struct VenueMapView: View {
                     .transition(.move(edge: .bottom))
             }
         }
+        .enableInjection()
     }
     
     // Hjelpefunksjon for å lage en "venue" for brukerens lokasjon
@@ -148,7 +151,7 @@ struct VenueMapView: View {
             id: -1,  // Bruker negativ ID for å skille fra faktiske venues
             name: "Din posisjon",
             type: .bar,
-            images: [],
+            image: "venue_placeholder",
             isOpen: true,
             ageLimit: 0,
             entryFee: nil,
@@ -163,5 +166,21 @@ struct VenueMapView: View {
 }
 
 #Preview {
-    VenueMapView(venues: [], isMapView: .constant(true), isPreviewActive: .constant(false))
+    VenueMapView(venues: [
+        Venue(
+            id: 1,
+            name: "Test Venue",
+            type: .bar,
+            image: "venue_placeholder",
+            isOpen: true,
+            ageLimit: 20,
+            entryFee: 100,
+            hasCoatCheck: true,
+            musicGenre: "Pop/Rock",
+            crowdLevel: .medium,
+            description: "Et koselig sted i hjertet av byen.",
+            latitude: 59.9139,
+            longitude: 10.7522
+        )
+    ], isMapView: .constant(true), isPreviewActive: .constant(false))
 } 

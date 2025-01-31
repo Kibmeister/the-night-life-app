@@ -1,6 +1,8 @@
 import SwiftUI
+import Inject
 
 struct CrowdLevelIndicator: View {
+    @ObserveInjection var inject
     let level: Venue.CrowdLevel
     
     var body: some View {
@@ -20,6 +22,7 @@ struct CrowdLevelIndicator: View {
                 .foregroundColor(.secondary)
                 .font(.subheadline)
         }
+        .enableInjection()
     }
     
     private func getColor(for index: Int) -> Color {

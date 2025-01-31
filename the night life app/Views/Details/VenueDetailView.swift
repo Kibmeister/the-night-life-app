@@ -1,12 +1,40 @@
 import CoreLocation
 import SwiftUI
+import Inject
+
+struct VenueImageView: View {
+    let imageUrl: String
+    @StateObject private var imageLoader = ImageLoader()
+    
+    var body: some View {
+        GeometryReader { geometry in
+            Group {
+                if let image = imageLoader.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .clipped()
+                } else {
+                    Color.gray.opacity(0.2)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .onAppear {
+                            imageLoader.load(from: imageUrl)
+                        }
+                }
+            }
+        }
+        .onDisappear {
+            imageLoader.cancel()
+        }
+    }
+}
 
 struct VenueDetailView: View {
+    @ObserveInjection var inject
     let venue: Venue
     @StateObject private var locationManager = LocationManager()
-    @State private var selectedImageIndex = 0
     
-    // Gjenbruker formatDistance funksjonen
     private func formatDistance() -> String {
         guard let userLocation = locationManager.userLocation,
               let venueLat = venue.latitude,
@@ -29,21 +57,8 @@ struct VenueDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 // Bildegalleri
-                if !venue.images.isEmpty {
-                    TabView {
-                        ForEach(venue.images, id: \.self) { imageUrl in
-                            AsyncImage(url: URL(string: imageUrl)) { image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                            } placeholder: {
-                                Color.gray.opacity(0.2)
-                            }
-                        }
-                    }
+                VenueImageView(imageUrl: venue.image)
                     .frame(height: 300)
-                    .tabViewStyle(.page)
-                }
                 
                 // Informasjon
                 VStack(alignment: .leading, spacing: 16) {
@@ -91,6 +106,7 @@ struct VenueDetailView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .enableInjection()
     }
 }
 
@@ -102,7 +118,7 @@ struct VenueDetailView_Previews: PreviewProvider {
                 id: 1,
                 name: "Test Venue",
                 type: .bar,
-                images: ["venue_placeholder"],
+                image: "venue_placeholder",
                 isOpen: true,
                 ageLimit: 20,
                 entryFee: 100,

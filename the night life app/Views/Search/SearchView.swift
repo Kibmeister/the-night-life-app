@@ -1,6 +1,8 @@
 import SwiftUI
+import Inject
 
 struct SearchView: View {
+    @ObserveInjection var inject
     @Environment(\.dismiss) private var dismiss
     @StateObject private var searchViewModel = SearchViewModel()
     @FocusState private var isSearchFieldFocused: Bool
@@ -57,6 +59,7 @@ struct SearchView: View {
         .onAppear {
             isSearchFieldFocused = true
         }
+        .enableInjection()
     }
 }
 

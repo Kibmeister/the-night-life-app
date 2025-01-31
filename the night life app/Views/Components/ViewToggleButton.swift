@@ -1,6 +1,8 @@
 import SwiftUI
+import Inject
 
 struct ViewToggleButton: View {
+    @ObserveInjection var inject
     @Binding var isMapView: Bool
     let isPreviewActive: Bool
     
@@ -20,6 +22,7 @@ struct ViewToggleButton: View {
         }
         .opacity(isPreviewActive ? 0 : 1)
         .animation(.easeInOut, value: isPreviewActive)
+        .enableInjection()
     }
 }
 

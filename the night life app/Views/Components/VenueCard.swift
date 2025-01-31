@@ -1,7 +1,9 @@
 import SwiftUI
 import CoreLocation
+import Inject
 
 struct VenueCard: View {
+    @ObserveInjection var inject
     let venue: Venue
     @StateObject private var locationManager = LocationManager()
     @StateObject private var imageLoader = ImageLoader()
@@ -29,20 +31,18 @@ struct VenueCard: View {
         NavigationLink(destination: VenueDetailView(venue: venue)) {
             VStack(spacing: 0) {
                 // Bakgrunnsbilde
-                if let firstImage = venue.images.first {
-                    if let image = imageLoader.image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 340)
-                            .clipped()
-                    } else {
-                        Color.gray.opacity(0.2)
-                            .frame(width: 340, height: 200)
-                            .onAppear {
-                                imageLoader.load(from: firstImage)
-                            }
-                    }
+                if let image = imageLoader.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 340)
+                        .clipped()
+                } else {
+                    Color.gray.opacity(0.2)
+                        .frame(width: 340, height: 200)
+                        .onAppear {
+                            imageLoader.load(from: venue.image)
+                        }
                 }
                 
                 // Informasjonscontainer
@@ -52,7 +52,7 @@ struct VenueCard: View {
                         .font(.title2)
                         .bold()
                         .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity, alignment: .leading)  // Sikrer at tittelen tar full bredde
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
                     // Tags container med scrolling
                     VStack(alignment: .leading, spacing: 8) {
@@ -71,7 +71,7 @@ struct VenueCard: View {
                                     
                                     HStack(spacing: 8) {
                                         StatusTag(text: venue.musicGenre, isActive: true)
-                                        Spacer()  // Skyver åpen/stengt tag til høyre
+                                        Spacer()
                                         StatusTag(text: venue.isOpen ? "Åpen" : "Stengt", 
                                                 isActive: venue.isOpen)
                                     }
@@ -82,7 +82,7 @@ struct VenueCard: View {
                 }
                 .padding(.vertical, 24)
                 .padding(.horizontal)
-                .frame(maxWidth: .infinity)  // Sikrer at containeren tar full bredde
+                .frame(maxWidth: .infinity)
                 .background(Color.black.opacity(0.1))
             }
             .frame(width: 340, height: 550)
@@ -97,6 +97,7 @@ struct VenueCard: View {
         .onDisappear {
             imageLoader.cancel()
         }
+        .enableInjection()
     }
 }
 
@@ -122,7 +123,7 @@ struct VenueCard_Previews: PreviewProvider {
             id: 1,
             name: "Test Venue",
             type: VenueType.bar,
-            images: ["venue_placeholder"],
+            image: "venue_placeholder",
             isOpen: true,
             ageLimit: 20,
             entryFee: 100,

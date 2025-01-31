@@ -30,16 +30,13 @@ class DBHelper {
             let dbPath = "\(path)/venues.sqlite3"
             print("Database path: \(dbPath)")
             
-            // Sjekk om databasen eksisterer
-            let databaseExists = FileManager.default.fileExists(atPath: dbPath)
+            // Slett eksisterende database for å tvinge reinitialisering
+            try? FileManager.default.removeItem(atPath: dbPath)
             
             db = try Connection(dbPath)
-            
-            if !databaseExists {
-                print("Oppretter ny database og initialiserer venues...")
-                createTable()
-                initializeVenues()
-            }
+            print("Oppretter ny database og initialiserer venues...")
+            createTable()
+            initializeVenues()
             
         } catch {
             print("Database initialization error: \(error)")
@@ -73,7 +70,7 @@ class DBHelper {
                 id: 1,
                 name: "The Villa",
                 type: .nightclub,
-                images: ["villa_image"],
+                image: "villa_image",
                 isOpen: true,
                 ageLimit: 23,
                 entryFee: 200,
@@ -88,7 +85,7 @@ class DBHelper {
                 id: 2,
                 name: "Blå",
                 type: .nightclub,
-                images: ["bla_image"],
+                image: "blaa_image",
                 isOpen: true,
                 ageLimit: 20,
                 entryFee: 150,
@@ -103,7 +100,7 @@ class DBHelper {
                 id: 3,
                 name: "Kulturhuset",
                 type: .bar,
-                images: ["kulturhuset_image"],
+                image: "kulturhuset_image",
                 isOpen: true,
                 ageLimit: 20,
                 entryFee: nil,
@@ -118,7 +115,7 @@ class DBHelper {
                 id: 4,
                 name: "Tilt",
                 type: .arcade,
-                images: ["tilt_image"],
+                image: "tilt_image",
                 isOpen: true,
                 ageLimit: 20,
                 entryFee: nil,
@@ -133,7 +130,7 @@ class DBHelper {
                 id: 5,
                 name: "Jaeger",
                 type: .nightclub,
-                images: ["jaeger_image"],
+                image: "jaeger_image",
                 isOpen: true,
                 ageLimit: 21,
                 entryFee: 150,
@@ -157,7 +154,7 @@ class DBHelper {
             let insert = venues.insert(
                 name <- venue.name,
                 type <- venue.type.rawValue,
-                image <- venue.images.first ?? "",
+                image <- venue.image,
                 isOpen <- venue.isOpen,
                 entryFee <- venue.entryFee.map { Int64($0) },
                 hasCoatCheck <- venue.hasCoatCheck,
@@ -184,14 +181,13 @@ class DBHelper {
             
             for venue in try db.prepare(venues) {
                 if let venueType = VenueType(rawValue: venue[type]) {
-                    // Spesifiserer typen eksplisitt for å unngå tvetydighet
                     let crowdLevelEnum = Venue.CrowdLevel(rawValue: venue[crowdLevel]) ?? .medium
                     
                     let venueObject = Venue(
                         id: Int(venue[id]),
                         name: venue[name],
                         type: venueType,
-                        images: [venue[image]],
+                        image: venue[image],
                         isOpen: venue[isOpen],
                         ageLimit: 18,
                         entryFee: venue[entryFee].map { Int($0) },
@@ -219,7 +215,7 @@ class DBHelper {
             try db?.run(venueRecord.update(
                 name <- venue.name,
                 type <- venue.type.rawValue,
-                image <- venue.images.first ?? "",
+                image <- venue.image,
                 isOpen <- venue.isOpen,
                 entryFee <- venue.entryFee.map { Int64($0) },
                 hasCoatCheck <- venue.hasCoatCheck,
