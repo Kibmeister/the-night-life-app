@@ -6,6 +6,10 @@ class VenueViewModel: ObservableObject {
     private let dbHelper = DBHelper.shared
     private let storageService = StorageService.shared
     
+    // Cache for bilde-URLer
+    private let defaults = UserDefaults.standard
+    private let imageUrlsCacheKey = "venueImageUrls"
+    
     init() {
         // Last venues fra databasen
         loadVenues()
@@ -22,6 +26,17 @@ class VenueViewModel: ObservableObject {
         venues = dbHelper.fetchVenues()
         filteredVenues = venues
         print("Antall venues lastet: \(venues.count)")
+    }
+    
+    private func saveImageUrlToCache(venueName: String, url: String) {
+        var cache = defaults.dictionary(forKey: imageUrlsCacheKey) as? [String: String] ?? [:]
+        cache[venueName] = url
+        defaults.set(cache, forKey: imageUrlsCacheKey)
+    }
+    
+    private func getImageUrlFromCache(venueName: String) -> String? {
+        let cache = defaults.dictionary(forKey: imageUrlsCacheKey) as? [String: String]
+        return cache?[venueName]
     }
     
     // Ny funksjon som kan kalles manuelt når vi trenger å oppdatere data
@@ -180,18 +195,27 @@ class VenueViewModel: ObservableObject {
              imageName: "himkok_image")
         ]
         
-        // Last opp bilder og lagre venues kun hvis databasen er tom
         if dbHelper.fetchVenues().isEmpty {
             for (venue, imageName) in newVenues {
                 if let image = UIImage(named: imageName) {
-                    do {
-                        let imageUrl = try await storageService.uploadImage(image, venueName: venue.name)
+                    // Sjekk først om vi har URL-en i cache
+                    if let cachedUrl = getImageUrlFromCache(venueName: venue.name) {
                         var venueWithImage = venue
-                        venueWithImage.images = [imageUrl]
+                        venueWithImage.images = [cachedUrl]
                         let success = dbHelper.insertVenue(venueWithImage)
-                        print("Lastet opp bilde for \(venue.name): \(success ? "suksess" : "feilet")")
-                    } catch {
-                        print("Feil ved opplasting av bilde for \(venue.name): \(error)")
+                        print("Bruker cachet bilde-URL for \(venue.name)")
+                    } else {
+                        // Last opp bilde kun hvis vi ikke har URL-en i cache
+                        do {
+                            let imageUrl = try await storageService.uploadImage(image, venueName: venue.name)
+                            saveImageUrlToCache(venueName: venue.name, url: imageUrl)
+                            var venueWithImage = venue
+                            venueWithImage.images = [imageUrl]
+                            let success = dbHelper.insertVenue(venueWithImage)
+                            print("Lastet opp bilde for \(venue.name): \(success ? "suksess" : "feilet")")
+                        } catch {
+                            print("Feil ved opplasting av bilde for \(venue.name): \(error)")
+                        }
                     }
                 }
             }

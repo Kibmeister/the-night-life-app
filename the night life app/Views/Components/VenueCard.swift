@@ -2,22 +2,37 @@ import SwiftUI
 
 struct VenueCard: View {
     let venue: Venue
+    @State private var cachedImage: UIImage?
     
     var body: some View {
         NavigationLink(destination: VenueDetailView(venue: venue)) {
             VStack(spacing: 0) {
                 // Bakgrunnsbilde
                 if let firstImage = venue.images.first {
-                    AsyncImage(url: URL(string: firstImage)) { image in
-                        image
+                    if let cached = cachedImage {
+                        Image(uiImage: cached)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 340)
                             .clipped()
-                    } placeholder: {
-                        Color.gray.opacity(0.2)
+                    } else {
+                        AsyncImage(url: URL(string: firstImage)) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 340)
+                                .clipped()
+                                .onAppear {
+                                    // Cache bildet når det lastes
+                                    if let data = try? Data(contentsOf: URL(string: firstImage)!),
+                                       let image = UIImage(data: data) {
+                                        cachedImage = image
+                                    }
+                                }
+                        } placeholder: {
+                            Color.gray.opacity(0.2)
+                        }
                     }
-                    .frame(maxHeight: .infinity, alignment: .top)
                 }
                 
                 // Informasjonscontainer

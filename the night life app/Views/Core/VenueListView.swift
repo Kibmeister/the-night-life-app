@@ -43,7 +43,7 @@ struct VenueListView: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: 
+            .navigationBarItems(trailing:    // Endret fra 'leading' til 'trailing'
                 Button(action: { showingSearchModal = true }) {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.black)
