@@ -5,6 +5,7 @@ struct MenuBar: View {
     @ObserveInjection var inject
     @State private var showProfileModule = false
     @State private var showMoodModule = false
+    @Binding var isPreviewActive: Bool
     
     var body: some View {
         HStack(spacing: 20) {
@@ -42,6 +43,8 @@ struct MenuBar: View {
         .frame(width: UIScreen.main.bounds.width * 0.5) // Dobbelt så bred som ViewToggleButton
         .shadow(radius: 5)
         .zIndex(100)
+        .opacity(isPreviewActive ? 0 : 1)
+        .animation(.easeInOut, value: isPreviewActive)
         .sheet(isPresented: $showProfileModule) {
             ProfileModule()
         }
@@ -53,5 +56,5 @@ struct MenuBar: View {
 }
 
 #Preview {
-    MenuBar()
+    MenuBar(isPreviewActive: .constant(false))
 } 

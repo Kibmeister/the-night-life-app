@@ -67,7 +67,7 @@ struct VenueListView: View {
                     if !isPreviewActive {
                         ViewToggleButton(isMapView: $isMapView, isPreviewActive: isPreviewActive)
                     }
-                    MenuBar()
+                    MenuBar(isPreviewActive: $isPreviewActive)
                 }
                 .padding(.bottom, 30)
             }
