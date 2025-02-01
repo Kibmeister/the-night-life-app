@@ -10,12 +10,12 @@ struct CategoryTag: View {
         Text(text)
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
-            .background(isSelected ? Color.black : Color.clear)
-            .foregroundColor(isSelected ? .white : .black)
+            .background(Color.clear)
+            .foregroundColor(.black)
             .cornerRadius(20)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.black, lineWidth: 1)
+                    .stroke(isSelected ? Color.black : Color.gray.opacity(0.2), lineWidth: 1)
             )
             .enableInjection()
     }
