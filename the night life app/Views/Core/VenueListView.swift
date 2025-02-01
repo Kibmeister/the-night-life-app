@@ -9,68 +9,60 @@ struct VenueListView: View {
     @State private var showingSearchModal = false
     @State private var searchText = ""
     @State private var isPreviewActive: Bool = false
-    @State private var lastScrollPosition: CGFloat = 0
-    @State private var navBarOffset: CGFloat = 0
+    @State private var scrollID: Int?
+    @State private var isScrolling: Bool = false
+    
+    private var venueListContent: some View {
+        ScrollView {
+            LazyVStack(spacing: 20) {
+                ForEach(viewModel.filteredVenues, id: \.id) { venue in
+                    VenueCard(venue: venue)
+                        .id(venue.id)
+                        .onTapGesture {
+                            withAnimation {
+                                scrollID = 0
+                            }
+                        }
+                }
+            }
+            .padding()
+            .padding(.bottom, 80)
+        }
+        .scrollPosition(id: $scrollID)
+        .onScrollPhaseChange { _, newPhase in
+            withAnimation(.easeInOut(duration: 0.2)) {
+                switch newPhase {
+                case .idle:
+                    isScrolling = false
+                case .animating, .tracking, .decelerating, .interacting:
+                    isScrolling = true
+                @unknown default:
+                    isScrolling = false
+                }
+            }
+        }
+        .contentMargins(.horizontal, 10, for: .scrollContent)
+    }
+    
+    private var mainContent: some View {
+        ZStack {
+            if !isMapView {
+                venueListContent
+            } else {
+                VenueMapView(venues: viewModel.filteredVenues, 
+                           isMapView: $isMapView,
+                           isPreviewActive: $isPreviewActive)
+            }
+        }
+    }
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 VStack(spacing: 0) {
-                    // Hoved innhold (enten liste eller kart)
-                    ZStack {
-                        if !isMapView {
-                            ScrollView {
-                                GeometryReader { geometry in
-                                    Color.clear.preference(
-                                        key: ScrollOffsetPreferenceKey.self,
-                                        value: geometry.frame(in: .named("scroll")).minY
-                                    )
-                                }
-                                .frame(height: 0)
-                                
-                                LazyVStack(spacing: 20) {
-                                    ForEach(viewModel.filteredVenues, id: \.id) { venue in
-                                        VenueCard(venue: venue)
-                                    }
-                                }
-                                .padding()
-                                .padding(.bottom, 80)
-                            }
-                            .coordinateSpace(name: "scroll")
-                            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                                let delta = value - lastScrollPosition
-                                print("=== SCROLL DEBUG ===")
-                                print("Current scroll position: \(value)")
-                                print("Last scroll position: \(lastScrollPosition)")
-                                print("Delta: \(delta)")
-                                print("Scroll direction: \(delta < 0 ? "DOWN ⬇️" : "UP ⬆️")")
-                                print("------------------")
-                                
-                                if abs(delta) > 5 {
-                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                        // Scroll ned (swipe opp) -> skjul navbar
-                                        if delta < 0 {
-                                            print("Hiding navbar (moving up)")
-                                            navBarOffset = -300 // Flytt navbar opp og ut av view
-                                        }
-                                        // Scroll opp (swipe ned) -> vis navbar
-                                        else {
-                                            print("Showing navbar (moving down)")
-                                            navBarOffset = 0 // Flytt navbar tilbake til original posisjon
-                                        }
-                                    }
-                                    lastScrollPosition = value
-                                }
-                            }
-                        } else {
-                            VenueMapView(venues: viewModel.filteredVenues, 
-                                       isMapView: $isMapView,
-                                       isPreviewActive: $isPreviewActive)
-                        }
-                    }
+                    mainContent
                 }
                 
-                // Toggle-knapp
                 if !isPreviewActive {
                     ViewToggleButton(isMapView: $isMapView, isPreviewActive: isPreviewActive)
                         .padding(.bottom, 30)
@@ -89,6 +81,7 @@ struct VenueListView: View {
                     }
                 }
             }
+            .toolbarVisibility(isScrolling ? .hidden : .visible)
             .sheet(isPresented: $showingSearchModal) {
                 SearchModalView(
                     isPresented: $showingSearchModal,
@@ -101,15 +94,7 @@ struct VenueListView: View {
         .onChange(of: selectedCategory) { oldValue, newValue in
             viewModel.filterVenues(by: newValue)
         }
-        .offset(y: navBarOffset) // Animerer hele NavigationView
         .enableInjection()
-    }
-}
-
-struct ScrollOffsetPreferenceKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
     }
 }
 
