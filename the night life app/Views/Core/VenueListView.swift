@@ -63,10 +63,13 @@ struct VenueListView: View {
                     mainContent
                 }
                 
-                if !isPreviewActive {
-                    ViewToggleButton(isMapView: $isMapView, isPreviewActive: isPreviewActive)
-                        .padding(.bottom, 30)
+                VStack(spacing: 8) {
+                    if !isPreviewActive {
+                        ViewToggleButton(isMapView: $isMapView, isPreviewActive: isPreviewActive)
+                    }
+                    MenuBar()
                 }
+                .padding(.bottom, 30)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

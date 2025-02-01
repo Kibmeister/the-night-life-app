@@ -13,12 +13,16 @@ struct ViewToggleButton: View {
             }
         }) {
             Image(systemName: isMapView ? "list.bullet" : "map")
-                .font(.title2)
+                .font(.title3)
                 .foregroundColor(.white)
-                .padding(12)
-                .background(Color.black)
-                .clipShape(Circle())
-                .shadow(radius: 4)
+                .padding(.top, 6)
+                .padding(.bottom, 6)
+                .padding(.leading, 12)
+                .padding(.trailing, 12)
+                .background(Color.gray)
+                .cornerRadius(20)
+                .clipShape(Rectangle())
+                
         }
         .opacity(isPreviewActive ? 0 : 1)
         .animation(.easeInOut, value: isPreviewActive)
