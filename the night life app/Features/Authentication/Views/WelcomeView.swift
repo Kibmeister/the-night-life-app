@@ -6,8 +6,11 @@ struct WelcomeView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 100) {
-                AuthHeaderText()
+            ZStack(alignment: .bottom) {
+                VStack {
+                    AuthHeaderText()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
                 AuthButton(
                     title: "Velkommen",
@@ -15,7 +18,8 @@ struct WelcomeView: View {
                 ) {
                     shouldShowLogin = true
                 }
-                .frame(width: 400)
+                .frame(width: 300)
+                .padding(.bottom, 50)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.white)
@@ -29,4 +33,4 @@ struct WelcomeView: View {
 
 #Preview {
     WelcomeView()
-}
+} 

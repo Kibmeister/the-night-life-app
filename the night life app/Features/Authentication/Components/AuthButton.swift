@@ -36,13 +36,13 @@ struct AuthButton: View {
             }
             .frame(maxWidth: .infinity)
             .padding()
-            .background(style == .primary ? Color.white : Color.clear)
-            .foregroundColor(style == .primary ? .black : .black)
+            .background(Color.white)
+            .foregroundColor(.black)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.black, lineWidth: style == .primary ? 1 : 0)
+                    .stroke(Color.black, lineWidth: 1)
             )
         }
         .buttonStyle(PlainButtonStyle())
     }
-} 
+}

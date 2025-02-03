@@ -26,18 +26,20 @@ struct LoginView: View {
                 AuthButton(
                     title: "Fortsett med Apple",
                     icon: Image(systemName: "apple.logo"),
-                    style: .apple
+                    style: .primary
                 ) {
                     // Apple login handling
                 }
+                .frame(width: 300)
                 
                 AuthButton(
                     title: "Fortsett med Google",
-                    icon: Image("google_icon"), // Trenger å legge til dette i assets
-                    style: .google
+                    icon: Image("google_icon"),
+                    style: .primary
                 ) {
                     // Google login handling
                 }
+                .frame(width: 300)
                 
                 AuthButton(
                     title: "Fortsett med email",
@@ -45,6 +47,7 @@ struct LoginView: View {
                 ) {
                     // Email login handling
                 }
+                .frame(width: 300)
                 
                 AuthButton(
                     title: "Fortsett med SSO",
@@ -52,6 +55,7 @@ struct LoginView: View {
                 ) {
                     // SSO login handling
                 }
+                .frame(width: 300)
             }
             .padding(.horizontal, 24)
             
@@ -69,7 +73,7 @@ struct LoginView: View {
             }
             .font(.system(size: 14))
             .foregroundColor(.gray)
-            .padding(.bottom, 24)
+            .padding(.bottom, 50)
         }
         .background(Color.white)
     }
