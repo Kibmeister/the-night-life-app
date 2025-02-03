@@ -2,6 +2,7 @@ import SwiftUI
 
 struct LoginView: View {
     @Environment(\.dismiss) private var dismiss
+    @State private var shouldShowVenueList = false
     
     var body: some View {
         VStack(spacing: 24) {
@@ -37,7 +38,7 @@ struct LoginView: View {
                     icon: Image("google_icon"),
                     style: .primary
                 ) {
-                    // Google login handling
+                    shouldShowVenueList = true
                 }
                 .frame(width: 300)
                 
@@ -76,5 +77,8 @@ struct LoginView: View {
             .padding(.bottom, 50)
         }
         .background(Color.white)
+        .fullScreenCover(isPresented: $shouldShowVenueList) {
+            VenueListView()
+        }
     }
 } 
